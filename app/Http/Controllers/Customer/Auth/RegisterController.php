@@ -40,13 +40,16 @@ class RegisterController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'f_name' => 'required',
+            'shipping_id' => 'exists:shipping_methods,id',
             'email' => 'required|email|unique:users',
-            'phone' => 'unique:users',
+            'phone' => ['unique:users', 'regex:/^(01|0201)[0-9]{9}$/'],
             'password' => 'required|min:8|same:con_password'
         ], [
             'f_name.required' => translate('first_name_is_required'),
             'email.unique' => translate('email_already_has_been_taken'),
             'phone.unique' => translate('phone_number_already_has_been_taken'),
+            'phone.regex' => translate('phone_number_should_begin_by_01_0201_and_contain_of_eleven_number'),
+            'shipping_id.exists' => translate('shipping_area_invalid'),
         ]);
 
         if($request->ajax()) {
@@ -81,6 +84,7 @@ class RegisterController extends Controller
             'l_name' => $request['l_name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
+            'shipping_method_id' => $request['shipping_id'],
             'is_active' => 1,
             'password' => bcrypt($request['password']),
             'referral_code' => Helpers::generate_referer_code(),

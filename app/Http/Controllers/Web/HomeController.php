@@ -59,7 +59,7 @@ class HomeController extends Controller
     public function default_theme()
     {
         $theme_name = theme_root_path();
-        $brand_setting = BusinessSetting::where('type', 'product_brand')->first()->value;
+        $brand_setting = BusinessSetting::where('type', 'product_brand')->first()?->value;
         $home_categories = Category::where('home_status', true)->priority()->get();
         $home_categories->map(function ($data) {
             $id = '"' . $data['id'] . '"';
@@ -85,7 +85,7 @@ class HomeController extends Controller
         $brands = Brand::active()
         ->take(15)
         ->orderBy('sort_order')
-        ->get();        
+        ->get();
         //best sell product
         $bestSellProduct = OrderDetail::with('product.reviews')
             ->whereHas('product', function ($query) {

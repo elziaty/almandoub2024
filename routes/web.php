@@ -171,7 +171,7 @@ Route::group(['namespace' => 'Web','middleware'=>['maintenance_mode','guestCheck
         Route::any('result', 'UserProfileController@track_order_result')->name('result');
         Route::get('order-wise-result-view', 'UserProfileController@track_order_wise_result')->name('order-wise-result-view');
     });
-    
+
     //sellerShop
     Route::get('shopView/{id}', 'ShopViewController@seller_shop')->name('shopView');
     Route::get('ajax-shop-vacation-check', 'ShopViewController@ajax_shop_vacation_check')->name('ajax-shop-vacation-check');//theme fashion

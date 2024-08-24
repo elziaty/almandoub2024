@@ -6416,4 +6416,5 @@
   'بنها' => 'بنها',
   'Feedback_Update_successfully' => 'Feedback Update successfully',
   'seen' => 'Seen',
+  'phone_number_should_begin_by_01_0201_and_contain_of_eleven_number' => 'Phone number should begin by 01 0201 and contain of eleven number',
 );

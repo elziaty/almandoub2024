@@ -84,7 +84,24 @@
                                             </label>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @php($shippings=\App\CPU\Helpers::get_shipping_methods(1,'admin'))
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <select class="form-control" name="shipping_id">
+                                                    <option>{{translate('choose_shipping_method')}}</option>
+                                                    @foreach($shippings as $shipping)
+                                                        <option
+                                                            value="{{$shipping['id']}}" {{old('shipping_id')==$shipping['id']?'selected':''}}>
+                                                            {{$shipping['title'].' ( '.$shipping['duration'].' ) '.\App\CPU\Helpers::currency_converter($shipping['cost'])}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 @if ($web_config['ref_earning_status'])
